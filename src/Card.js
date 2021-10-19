@@ -7,9 +7,12 @@ export default function Card({ product }) {
   const [value, setValue] = useState(0);
   const numValue = Number(value);
   const dispatch = useDispatch();
-  function resetValue() {
+
+  function resetValue(id) {
     setValue(0);
+    dispatch(deleteFromCard(id));
   }
+
   return (
     <ul>
       <li key={product.index}>{product.title}</li>
@@ -26,13 +29,7 @@ export default function Card({ product }) {
       >
         Save
       </button>
-      <button
-        className="buttonStyle"
-        onClick={() => {
-          resetValue();
-          dispatch(deleteFromCard(product.id));
-        }}
-      >
+      <button className="buttonStyle" onClick={() => resetValue(product.id)}>
         Delete
       </button>
     </ul>
