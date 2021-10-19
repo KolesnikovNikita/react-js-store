@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { addToCart } from "./actions";
+import { deleteFromCard } from "./actions";
 
 export default function Card({ product }) {
   const [value, setValue] = useState(0);
+  const numValue = Number(value);
   const dispatch = useDispatch();
+  function resetValue() {
+    setValue(0);
+  }
   return (
     <ul>
       <li key={product.index}>{product.title}</li>
@@ -16,26 +22,16 @@ export default function Card({ product }) {
       />
       <button
         className="buttonStyle"
-        onClick={() =>
-          dispatch({
-            type: "ADD_TO_CARD",
-            newProduct: {
-              id: product.id,
-              count: Number(value),
-            },
-          })
-        }
+        onClick={() => dispatch(addToCart(numValue, product.id))}
       >
         Save
       </button>
       <button
         className="buttonStyle"
-        onClick={() =>
-          dispatch({
-            type: "DELETE_FROM_CARD",
-            id: product.id,
-          })
-        }
+        onClick={() => {
+          resetValue();
+          dispatch(deleteFromCard(product.id));
+        }}
       >
         Delete
       </button>
