@@ -1,15 +1,11 @@
 import React from "react";
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-function Header({ userName }) {
+export default function Header() {
+  const userName = useSelector((state) => state.user.name)
+  const userId = useSelector((state) => state.user.id)
   return <div>
     <h1>Hello, {userName}</h1>
-    <p>Now you have these pretty things:</p>
+    <p><b>your id: {userId}</b></p>
   </div>
 }
-
-export default connect((state) => {
-  return {
-    userName: state.user.name,
-  }
-})(Header);

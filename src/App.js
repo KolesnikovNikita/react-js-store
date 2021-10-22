@@ -1,17 +1,45 @@
 import "./App.css";
 import Basket from "./Basket";
-import Main from "./Main";
+import Card from './Card';
 import Header from "./Header";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 
 function App() {
   return (
-    <div className="App">
-      <Header />
+    <Router>
       <div>
-        <Main />
-        <Basket />
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Card</Link>
+            </li>
+            <li>
+              <Link to="/me">Main</Link>
+            </li>
+            <li>
+              <Link to="/basket">Basket</Link>
+            </li>
+          </ul>
+        </nav>
+        <Switch>
+          <Route exact path="/me">
+            <Header />
+          </Route>
+          <Route exact path="/basket">
+            <Basket />
+          </Route>
+          <Route exact path="/">
+            <Card />
+          </Route>
+        </Switch>
       </div>
-    </div>
+    </Router>
   );
 }
 
