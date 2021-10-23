@@ -1,44 +1,33 @@
-import "./App.css";
+import User from "./User";
+import Main from "./Main";
 import Basket from "./Basket";
-import Card from './Card';
-import Header from "./Header";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Card</Link>
-            </li>
-            <li>
-              <Link to="/me">Main</Link>
-            </li>
-            <li>
-              <Link to="/basket">Basket</Link>
-            </li>
-          </ul>
-        </nav>
-        <Switch>
-          <Route exact path="/me">
-            <Header />
-          </Route>
-          <Route exact path="/basket">
-            <Basket />
-          </Route>
-          <Route exact path="/">
-            <Card />
-          </Route>
-        </Switch>
-      </div>
+      <ul>
+        <li>
+          <Link to="/user">User</Link>
+        </li>
+        <li>
+          <Link to="/">MainPage</Link>
+        </li>
+        <li>
+          <Link to="/basket">Basket</Link>
+        </li>
+      </ul>
+      <Switch>
+        <Route exact path="/user">
+          <User />
+        </Route>
+        <Route exact path="/">
+          <Main />
+        </Route>
+        <Route exact path="/basket">
+          <Basket />
+        </Route>
+      </Switch>
     </Router>
   );
 }
