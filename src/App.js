@@ -1,7 +1,9 @@
 import User from "./User";
 import Main from "./Main";
-import Basket from "./Basket";
+import CartContainer from "./CartContainer";
+import FavoriteProducts from "./Favorite";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "./App.css";
 
 function App() {
   return (
@@ -14,7 +16,10 @@ function App() {
           <Link to="/">MainPage</Link>
         </li>
         <li>
-          <Link to="/basket">Basket</Link>
+          <Link to="/cart">Cart</Link>
+        </li>
+        <li>
+          <Link to="/favorite">Favorite Products</Link>
         </li>
       </ul>
       <Switch>
@@ -24,8 +29,11 @@ function App() {
         <Route exact path="/">
           <Main />
         </Route>
-        <Route exact path="/basket">
-          <Basket />
+        <Route exact path="/cart">
+          <CartContainer />
+        </Route>
+        <Route exact path="/favorite">
+          <FavoriteProducts />
         </Route>
       </Switch>
     </Router>

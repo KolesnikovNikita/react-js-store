@@ -1,16 +1,17 @@
-export const addToCart = (count, id) => {
-  return {
-    type: 'ADD_TO_CARD',
-    productId: id,
-    productCount: count,
-  }
-};
-
-export const deleteFromCard = (id) => ({
-  type: 'DELETE_FROM_CARD',
-  id
+export const addToCart = (count, id) => ({
+  type: 'ADD_TO_CARD',
+  productId: id,
+  productCount: count,
 })
 
-export const resetBasket = () => ({
-  type: 'RESET_BASKET',
+export const addToFavorite = (value, id) => ({
+  type: 'ADD_TO_FAVORITE',
+  productId: id,
+  productCount: value
 })
+
+export const deleteFromFavorite = (id) => ({
+  type: 'DELETE_FROM_FAVORITE',
+  productId: id,
+})
+

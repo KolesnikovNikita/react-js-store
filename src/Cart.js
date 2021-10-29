@@ -1,39 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "./actions";
-import { deleteFromCard } from "./actions";
-import "./Main.css";
 
-export default function Cart({ product }) {
-  const [value, setValue] = useState(0);
-  const numValue = Number(value);
+export default function Cart({ productProps }) {
   const dispatch = useDispatch();
-
-  function resetValue(id) {
-    setValue(0);
-    dispatch(deleteFromCard(id));
-  }
-
   return (
-    <div className="MainStyle">
+    <div>
       <ul>
-        <li key={product.index}>{product.title}</li>
-        <input
-          type="number"
-          min="0"
-          max="100"
-          onChange={(e) => setValue(e.target.value)}
-          value={value}
-        />
-        <button
-          className="buttonStyle"
-          onClick={() => dispatch(addToCart(numValue, product.id))}
-        >
-          Save
-        </button>
-        <button className="buttonStyle" onClick={() => resetValue(product.id)}>
-          Delete
-        </button>
+        <li key={productProps.id}><img src={productProps.image} alt="products" width="50" height="50" />
+          <b>{productProps.title}</b><p><i>{productProps.description}</i></p><p>Count: {productProps.count}</p>
+          <button className="buttonStyle" onClick={() => {
+            dispatch({
+              type: "REMOVE_FROM_CART",
+              id: productProps.id
+            })
+          }}>Delete</button></li>
       </ul>
     </div>
   );
