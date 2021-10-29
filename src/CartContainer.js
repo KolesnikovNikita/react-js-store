@@ -8,6 +8,11 @@ export default function CartContainer() {
   const cartProducts = useSelector((state) => state.cart);
   let history = useHistory();
 
+  function clearCart() {
+    history.push("/");
+    dispatch({ type: "CLEAR_CART" });
+  }
+
   const globalProducts = useSelector((state) => state.products);
 
   const products = Object.keys(cartProducts).map((cartProductId) => {
@@ -23,14 +28,7 @@ export default function CartContainer() {
       {products.map((product) => {
         return <Cart key={product.id} productProps={product} />;
       })}
-      <button
-        onClick={() => {
-          history.push("/");
-          dispatch({ type: "CLEAR_CART" });
-        }}
-      >
-        Clear
-      </button>
+      <button onClick={() => clearCart()}>Clear</button>
     </>
   );
 }
