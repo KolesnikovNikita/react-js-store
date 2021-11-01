@@ -28,7 +28,9 @@ export default function CartContainer() {
       {products.map((product) => {
         return <Cart key={product.id} productProps={product} />;
       })}
-      <button onClick={() => clearCart()}>Clear</button>
+      {Object.keys(cartProducts).length > 0 && (
+        <button onClick={() => clearCart()}>Clear</button>
+      )}
     </>
   );
 }

@@ -5,6 +5,8 @@ import FavoriteProducts from "./Favorite";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import { useSelector } from "react-redux";
+import { mainPath, userPath, cartPath, favoritePath } from "./helpers/routes";
+import ProductPage from "./ProductPage";
 
 function App() {
   const countOfProduct = useSelector((state) => state.cart);
@@ -29,18 +31,11 @@ function App() {
         </li>
       </ul>
       <Switch>
-        <Route exact path="/user">
-          <User />
-        </Route>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        <Route exact path="/cart">
-          <CartContainer />
-        </Route>
-        <Route exact path="/favorite">
-          <FavoriteProducts />
-        </Route>
+        <Route exact path={mainPath()} component={Main} />
+        <Route exact path={userPath()} component={User} />
+        <Route exact path={cartPath()} component={CartContainer} />
+        <Route exact path={favoritePath()} component={FavoriteProducts} />
+        <Route exact path="/product/:id" component={ProductPage} />
       </Switch>
     </Router>
   );
