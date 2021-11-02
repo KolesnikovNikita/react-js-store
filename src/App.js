@@ -2,10 +2,17 @@ import User from "./User";
 import Main from "./Main";
 import CartContainer from "./CartContainer";
 import FavoriteProducts from "./Favorite";
+import ProfileEdit from "./ProfileEdit";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import { useSelector } from "react-redux";
-import { mainPath, userPath, cartPath, favoritePath } from "./helpers/routes";
+import {
+  mainPath,
+  userPath,
+  cartPath,
+  favoritePath,
+  prifileEditPath,
+} from "./helpers/routes";
 import ProductPage from "./ProductPage";
 
 function App() {
@@ -36,6 +43,7 @@ function App() {
         <Route exact path={cartPath()} component={CartContainer} />
         <Route exact path={favoritePath()} component={FavoriteProducts} />
         <Route exact path="/product/:id" component={ProductPage} />
+        <Route exact path={prifileEditPath()} component={ProfileEdit} />
       </Switch>
     </Router>
   );
