@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import User from "./User";
+import Main from "./Main";
+import CartContainer from "./CartContainer";
+import FavoriteProducts from "./Favorite";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "./App.css";
+import { useSelector } from "react-redux";
+import { mainPath, userPath, cartPath, favoritePath } from "./helpers/routes";
+import ProductPage from "./ProductPage";
 
 function App() {
+  const countOfProduct = useSelector((state) => state.cart);
+  const countOfFavorite = useSelector((state) => state.favorite);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ul>
+        <li>
+          <Link to="/user">User</Link>
+        </li>
+        <li>
+          <Link to="/">MainPage</Link>
+        </li>
+        <li>
+          <Link to="/cart">Cart ({Object.values(countOfProduct).length})</Link>
+        </li>
+        <li>
+          <Link to="/favorite">
+            Favorite Products ({Object.values(countOfFavorite).length})
+          </Link>
+        </li>
+      </ul>
+      <Switch>
+        <Route exact path={mainPath()} component={Main} />
+        <Route exact path={userPath()} component={User} />
+        <Route exact path={cartPath()} component={CartContainer} />
+        <Route exact path={favoritePath()} component={FavoriteProducts} />
+        <Route exact path="/product/:id" component={ProductPage} />
+      </Switch>
+    </Router>
   );
 }
 
