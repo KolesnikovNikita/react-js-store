@@ -3,25 +3,17 @@ const initialState = {
   surname: "Roberts",
   id: 1,
   age: 39,
-  eMail: "bartolomewSwag@mail.com",
+  email: "bartolomewSwag@mail.com",
 };
 
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case "EDIT_NAME":
+    case "EDIT_PROFILE":
       return {
         ...state,
         name: action.name,
-      };
-    case "EDIT_SURNAME":
-      return {
-        ...state,
         surname: action.surname,
-      };
-    case "EDIT_EMAIL":
-      return {
-        ...state,
-        eMail: action.eMail,
+        email: action.email,
       };
     default:
       return state;

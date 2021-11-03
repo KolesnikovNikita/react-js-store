@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function User() {
-  const { id, name, surname, eMail } = useSelector((state) => state.user);
+  const { id, name, surname, email } = useSelector((state) => state.user);
   return (
     <div className="UserStyle">
       <div>
@@ -12,7 +12,7 @@ export default function User() {
           <b>Surname: {surname}</b>
         </p>
         <p>
-          <b>E - mail: {eMail}</b>
+          <b>E - mail: {email}</b>
         </p>
         <p>
           <b>id: {id}</b>

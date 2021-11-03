@@ -19,7 +19,6 @@ import ProductPage from "./ProductPage";
 function App() {
   const countOfProduct = useSelector((state) => state.cart);
   const countOfFavorite = useSelector((state) => state.favorite);
-  const { name, surname, eMail } = useSelector((state) => state.user);
 
   return (
     <div>

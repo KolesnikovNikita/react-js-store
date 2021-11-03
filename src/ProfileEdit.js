@@ -8,13 +8,11 @@ export default function ProfileEdit() {
   const userInfo = useSelector((state) => state.user);
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
-  const [eMail, setEmail] = useState("");
+  const [email, setEmail] = useState("");
 
   function editUserInfo() {
     history.push("/user");
-    dispatch({ type: "EDIT_NAME", name });
-    dispatch({ type: "EDIT_SURNAME", surname });
-    dispatch({ type: "EDIT_EMAIL", eMail });
+    dispatch({ type: "EDIT_PROFILE", name, surname, email });
   }
 
   return (
@@ -29,8 +27,8 @@ export default function ProfileEdit() {
           <input value={surname} onChange={(e) => setSurname(e.target.value)} />
         </p>
         <p>
-          Edit E-mail: {userInfo.eMail} to
-          <input value={eMail} onChange={(e) => setEmail(e.target.value)} />
+          Edit E-mail: {userInfo.email} to
+          <input value={email} onChange={(e) => setEmail(e.target.value)} />
         </p>
       </div>
       <div>
