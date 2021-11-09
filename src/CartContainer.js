@@ -5,8 +5,7 @@ import { useHistory } from "react-router";
 import UserForm from "./Form";
 
 export default function CartContainer() {
-  const [buttonState, setbuttonState] = React.useState(false);
-  const [isFormSubmitted, setIsFormSubmitted] = React.useState(false);
+  const [orderState, setOrederState] = React.useState("view-form");
   const dispatch = useDispatch();
   const cartProducts = useSelector((state) => state.cart);
   let history = useHistory();
@@ -27,36 +26,42 @@ export default function CartContainer() {
   });
 
   let content;
-  if (isFormSubmitted) {
-    content = <div className="UserStyle">Well done!</div>;
-  } else if (buttonState) {
-    content = (
-      <UserForm products={products} setIsFormSubmitted={setIsFormSubmitted} />
-    );
-  } else {
+  if (orderState === "view-form") {
     content = (
       <div>
         <div>
-          {products.map((product) => {
-            return <Cart key={product.id} productProps={product} />;
-          })}
-        </div>
-        <div className="UserStyle">
-          {Object.keys(cartProducts).length > 0 && (
-            <button onClick={() => clearCart()}>Clear</button>
-          )}
-          {Object.keys(cartProducts).length > 0 && (
-            <button
-              onClick={() => {
-                setbuttonState(true);
-              }}
-            >
-              Check out
-            </button>
-          )}
+          <div>
+            {products.map((product) => {
+              return <Cart key={product.id} productProps={product} />;
+            })}
+          </div>
+          <div className="UserStyle">
+            {Object.keys(cartProducts).length > 0 && (
+              <button onClick={() => clearCart()}>Clear</button>
+            )}
+            {Object.keys(cartProducts).length > 0 && (
+              <button
+                onClick={() => {
+                  setOrederState("edit-form");
+                }}
+              >
+                Check out
+              </button>
+            )}
+          </div>
         </div>
       </div>
     );
+  } else if (orderState === "edit-form") {
+    content = (
+      <UserForm
+        orderState={orderState}
+        products={products}
+        setOrederState={setOrederState}
+      />
+    );
+  } else {
+    content = <div className="UserStyle">Well done</div>;
   }
 
   return <div>{content}</div>;

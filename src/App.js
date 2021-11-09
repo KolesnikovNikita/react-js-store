@@ -13,6 +13,7 @@ import {
   cartPath,
   favoritePath,
   prifileEditPath,
+  productPath,
 } from "./helpers/routes";
 import ProductPage from "./ProductPage";
 
@@ -47,7 +48,7 @@ function App() {
           <Route exact path={userPath()} component={User} />
           <Route exact path={cartPath()} component={CartContainer} />
           <Route exact path={favoritePath()} component={FavoriteProducts} />
-          <Route exact path="/product/:id" component={ProductPage} />
+          <Route exact path={productPath()} component={ProductPage} />
           <Route exact path={prifileEditPath()} component={ProfileEdit} />
         </Switch>
       </Router>

@@ -3,3 +3,4 @@ export const userPath = () => "/user";
 export const cartPath = () => "/cart";
 export const favoritePath = () => "/favorite";
 export const prifileEditPath = () => "/profile/edit";
+export const productPath = () => "/product/:id";

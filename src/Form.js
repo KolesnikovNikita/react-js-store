@@ -2,23 +2,21 @@ import React from "react";
 import { Form, Field } from "react-final-form";
 import { useDispatch } from "react-redux";
 
-export default function UserForm({ products, setIsFormSubmitted }) {
+export default function UserForm({ products, setOrederState, orderState }) {
   const dispatch = useDispatch();
   const infoProduct = products.reduce((acc, product) => {
     acc[product.id] = product.count;
     return acc;
   }, {});
 
-  function onSubmit(e) {
-    dispatch({ type: "CLEAR_CART" });
-    setIsFormSubmitted(true);
-    const info = [];
-    info.push(e, infoProduct);
-    console.log(info);
-  }
+  const required = (value) => (value ? undefined : "Required");
 
-  function required(value) {
-    return value ? undefined : "Required";
+  function onSubmit(values) {
+    dispatch({ type: "CLEAR_CART" });
+    setOrederState("success");
+    const info = [];
+    info.push(values, infoProduct);
+    console.log(info);
   }
 
   const totalPrice = products.reduce((acc, product) => acc + product.price, 0);
@@ -38,50 +36,87 @@ export default function UserForm({ products, setIsFormSubmitted }) {
         render={({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
             <div>
-              <label>First Name</label>
               <Field
                 name="firstName"
-                component="input"
                 placeholder="First Name"
                 validate={required}
-              />
-            </div>
-            <div>
-              <label>Second Name</label>
-              <Field
-                name="secondName"
-                component="input"
-                placeholder="Second Name"
-                validate={required}
-              />
-            </div>
-            <div>
-              <label>Email</label>
-              <Field name="email" component="input" placeholder="Email" />
-            </div>
-            <div>
-              <label>Phone number</label>
-              <Field name="phone" validate={required}>
+              >
                 {({ input, meta }) => (
                   <div>
-                    <label>Phone</label>
+                    <label>First Name</label>
                     <input
-                      type="text"
                       {...input}
-                      placeholder="+3(099) 999 - 99 - 99"
+                      type="text"
+                      placeholder="First Name"
+                      className={meta.error && meta.touched && "inputRequired"}
                     />
-                    {meta.touched && meta.error && <span>{meta.error}</span>}
                   </div>
                 )}
               </Field>
             </div>
             <div>
               <Field
-                name="comments"
-                component="textarea"
-                placeholder="Type your comment here"
+                name="secondName"
+                placeholder="Second Name"
                 validate={required}
-              />
+              >
+                {({ input, meta }) => (
+                  <div>
+                    <label>Second Name</label>
+                    <input
+                      {...input}
+                      type="text"
+                      placeholder="Second Name"
+                      className={meta.error && meta.touched && "inputRequired"}
+                    />
+                  </div>
+                )}
+              </Field>
+            </div>
+            <div>
+              <Field name="email" validate={required}>
+                {({ input, meta }) => (
+                  <div>
+                    <label>Email</label>
+                    <input
+                      {...input}
+                      type="email"
+                      placeholder="Your email"
+                      className={meta.error && meta.touched && "inputRequired"}
+                    />
+                  </div>
+                )}
+              </Field>
+            </div>
+            <div>
+              <Field name="phone" validate={required}>
+                {({ input, meta }) => (
+                  <div>
+                    <label>Phone</label>
+                    <input
+                      className={meta.error && meta.touched && "inputRequired"}
+                      type="text"
+                      {...input}
+                      placeholder="+3 8(099) 999 - 99 - 99"
+                    />
+                  </div>
+                )}
+              </Field>
+            </div>
+            <div>
+              <Field name="comments" validate={required}>
+                {({ input, meta }) => (
+                  <div>
+                    <label>Comment</label>
+                    <textarea
+                      className={meta.error && meta.touched && "inputRequired"}
+                      type="text"
+                      {...input}
+                      placeholder="Your comments"
+                    />
+                  </div>
+                )}
+              </Field>
             </div>
             <button type="submit">Submit</button>
           </form>
@@ -95,23 +130,3 @@ export default function UserForm({ products, setIsFormSubmitted }) {
     </div>
   );
 }
-
-/*
-// import InputMask from "react-input-mask";
-<InputMask
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            mask="+3\(099) 999-9999"
-            maskChar=" "
-          /> */
-// const [phone, setPhone] = React.useState("");
-
-// const infoProduct = products.reduce((acc, product) => {
-//   acc[product.id] = product.count;
-//   return acc;
-// }, {});
-
-// function clearCart() {
-//   dispatch({ type: "CLEAR_CART" });
-//   setbuttonState(!buttonState);
-// }
