@@ -36,3 +36,7 @@ li {
   justify-content: space-around;
   align-items: flex-start;
 }
+
+.inputRequired {
+  border: 2px solid rgb(226, 13, 13);
+}
